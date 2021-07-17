@@ -1,0 +1,11 @@
+Ecuc:
+  Os:
+    OsMemoryArea_PerfTimer:
+      DefinitionRef: OsMemoryArea
+      OsMemoryAreaStartAddress: 0xffe30000
+      OsMemoryAreaSize: 0x1000
+      OsMemoryAreaWriteable: true
+      OsMemoryAreaReadable: true
+      OsMemoryAreaExecutable: false
+      OsMemoryAreaCacheable: false
+      OsMemoryAreaDevice: false

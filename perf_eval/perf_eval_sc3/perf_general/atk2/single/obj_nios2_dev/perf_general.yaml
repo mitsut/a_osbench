@@ -1,0 +1,1401 @@
+#
+#  TOPPERS/A-OSBENCH
+#      Toyohashi Open Platform for Embedded Real-Time Systems
+#      Automotive Operating System Benchmark
+#
+#  Copyright (C) 2014 by Center for Embedded Computing Systems
+#              Graduate School of Information Science, Nagoya Univ., JAPAN
+#  Copyright (C) 2014 by FUJISOFT INCORPORATED, JAPAN
+#  Copyright (C) 2014 by Sunny Giken Inc., JAPAN
+#
+#  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
+#  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
+#  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
+#  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
+#      権表示，この利用条件および下記の無保証規定が，そのままの形でソー
+#      スコード中に含まれていること．
+#  (2) 本ソフトウェアを，ライブラリ形式など，他のソフトウェア開発に使
+#      用できる形で再配布する場合には，再配布に伴うドキュメント（利用
+#      者マニュアルなど）に，上記の著作権表示，この利用条件および下記
+#      の無保証規定を掲載すること．
+#  (3) 本ソフトウェアを，機器に組み込むなど，他のソフトウェア開発に使
+#      用できない形で再配布する場合には，次のいずれかの条件を満たすこ
+#      と．
+#    (a) 再配布に伴うドキュメント（利用者マニュアルなど）に，上記の著
+#        作権表示，この利用条件および下記の無保証規定を掲載すること．
+#    (b) 再配布の形態を，別に定める方法によって，TOPPERSプロジェクトに
+#        報告すること．
+#  (4) 本ソフトウェアの利用により直接的または間接的に生じるいかなる損
+#      害からも，上記著作権者およびTOPPERSプロジェクトを免責すること．
+#      また，本ソフトウェアのユーザまたはエンドユーザからのいかなる理
+#      由に基づく請求からも，上記著作権者およびTOPPERSプロジェクトを
+#      免責すること．
+#
+#  本ソフトウェアは，AUTOSAR（AUTomotive Open System ARchitecture）仕
+#  様に基づいている．上記の許諾は，AUTOSARの知的財産権を許諾するもので
+#  はない．AUTOSARは，AUTOSAR仕様に基づいたソフトウェアを商用目的で利
+#  用する者に対して，AUTOSARパートナーになることを求めている．
+#
+#  本ソフトウェアは，無保証で提供されているものである．上記著作権者お
+#  よびTOPPERSプロジェクトは，本ソフトウェアに関して，特定の使用目的
+#  に対する適合性も含めて，いかなる保証も行わない．また，本ソフトウェ
+#  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
+#  の責任を負わない．
+#
+#  $Id: perf_general.yaml 654 2016-05-06 23:19:35Z ertl-honda $
+#
+
+IMPLEMENTATION-DATA-TYPE:
+  uint8:
+    CATEGORY: VALUE
+
+Ecuc:
+  Os:
+    OsInclude1:
+      DefinitionRef: OsInclude
+      OsIncludeFileName: perf_general.h
+    OsInclude2:
+      DefinitionRef: OsInclude
+      OsIncludeFileName: test_target_lib.h
+    OsInclude3:
+      DefinitionRef: OsInclude
+      OsIncludeFileName: perf_general_nt.h
+    OsOS:
+      OsStackMonitoring: false
+      OsUseGetServiceId: true
+      OsUseParameterAccess: true
+      OsScalabilityClass: SC3
+      OsStatus: EXTENDED
+      OsHooks:
+        OsErrorHook: true
+        OsPostTaskHook: false
+        OsPreTaskHook: false
+        OsProtectionHook: true
+        OsShutdownHook: false
+        OsStartupHook: false
+    MainApp:
+      DefinitionRef: OsAppMode
+    T_OSAP1_TerApp_F_Isr2:
+      DefinitionRef: OsIsr
+      OsIsrCategory: CATEGORY_2
+      OsIsrInterruptNumber: INTNO_TERAPP_F1
+      OsIsrInterruptSource: ENABLE
+      OsIsrInterruptPriority: INTPRI_TIMER_NUM
+      OsIsrStackSize: ISR_STACK_SIZE
+    T_OSAP2_TerApp_F_Isr2:
+      DefinitionRef: OsIsr
+      OsIsrCategory: CATEGORY_2
+      OsIsrInterruptNumber: INTNO_TERAPP_F2
+      OsIsrInterruptSource: ENABLE
+      OsIsrInterruptPriority: INTPRI_TIMER_NUM
+      OsIsrStackSize: ISR_STACK_SIZE
+    T_OSAP3_TerApp_F_Isr2:
+      DefinitionRef: OsIsr
+      OsIsrCategory: CATEGORY_2
+      OsIsrInterruptNumber: INTNO_TERAPP_F3
+      OsIsrInterruptSource: ENABLE
+      OsIsrInterruptPriority: INTPRI_TIMER_NUM
+      OsIsrStackSize: ISR_STACK_SIZE
+    T_OSAP4_TerApp_F_Isr2:
+      DefinitionRef: OsIsr
+      OsIsrCategory: CATEGORY_2
+      OsIsrInterruptNumber: INTNO_TERAPP_F4
+      OsIsrInterruptSource: ENABLE
+      OsIsrInterruptPriority: INTPRI_TIMER_NUM
+      OsIsrStackSize: ISR_STACK_SIZE
+    MainTask:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 1
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskAutostart:
+        OsTaskAppModeRef: /Ecuc/Os/MainApp
+    T_OSAP1_TerApp_D_Task3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    T_OSAP1_TerApp_E_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_Tfn_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_ChkMem_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_TerApp_C_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_TerApp_C_ReTask2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_TerApp_C_Task3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_TerApp_D_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_TerApp_D_ReTask2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_TerApp_E_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_TerApp_E_ReTask3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_TerApp_E_ResetTask:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 5
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_TerApp_F_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_TerApp_F_ReTask2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    T_OSAP2_TerApp_D_Task3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    T_OSAP2_TerApp_E_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_C_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_C_ReTask2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_C_Task3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_C_Task4:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_C_Task5:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_C_Task6:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_D_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_D_ReTask2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_D_Task4:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_D_Task5:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_D_Task6:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_E_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_E_ReTask3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_E_ResetTask:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 5
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_E_Task4:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_E_Task5:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_E_Task6:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_F_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_F_ReTask2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_F_Task3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_F_Task4:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_TerApp_F_Task5:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    T_OSAP3_TerApp_D_Task3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    T_OSAP3_TerApp_E_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_C_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_C_ReTask2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_C_Task3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_C_Task4:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_C_Task5:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_C_Task6:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_C_Task7:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_C_Task8:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_C_Task9:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_C_Task10:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_D_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_D_ReTask2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_D_Task4:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_D_Task5:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_D_Task6:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_D_Task7:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_D_Task8:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_D_Task9:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_D_Task10:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_E_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_E_ReTask3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_E_ResetTask:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 5
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_E_Task4:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_E_Task5:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_E_Task6:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_E_Task7:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_E_Task8:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_E_Task9:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_E_Task10:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_F_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_F_ReTask2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_F_Task3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_F_Task4:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_F_Task5:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_F_Task6:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_F_Task7:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_F_Task8:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP3_TerApp_F_Task9:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    T_OSAP4_TerApp_D_Task3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    T_OSAP4_TerApp_E_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_C_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_C_ReTask2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_C_Task3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_C_Task4:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_C_Task5:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_C_Task6:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_C_Task7:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_C_Task8:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_C_Task9:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_C_Task10:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_C_Task11:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_C_Task12:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_C_Task13:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_C_Task14:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_C_Task15:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_C_Task16:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_C_Task17:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_C_Task18:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_D_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_D_ReTask2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_D_Task4:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_D_Task5:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_D_Task6:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_D_Task7:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_D_Task8:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_D_Task9:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_D_Task10:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_D_Task11:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_D_Task12:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_D_Task13:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_D_Task14:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_D_Task15:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_D_Task16:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_D_Task17:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_D_Task18:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_E_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_E_ReTask3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_E_ResetTask:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 5
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_E_Task4:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_E_Task5:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_E_Task6:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_E_Task7:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_E_Task8:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_E_Task9:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_E_Task10:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_E_Task11:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_E_Task12:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_E_Task13:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_E_Task14:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_E_Task15:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_E_Task16:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_E_Task17:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_E_Task18:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_F_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_F_ReTask2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_F_Task3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_F_Task4:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_F_Task5:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_F_Task6:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_F_Task7:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_F_Task8:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_F_Task9:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_F_Task10:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_F_Task11:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_F_Task12:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_F_Task13:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_F_Task14:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_F_Task15:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_F_Task16:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP4_TerApp_F_Task17:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    T_OSAP_MAIN:
+      DefinitionRef: OsApplication
+      OsTrusted: true
+      OsAppTaskRef:
+        - /Ecuc/Os/MainTask
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    T_OSAP1:
+      DefinitionRef: OsApplication
+      OsTrusted: true
+      OsAppTaskRef:
+        - /Ecuc/Os/T_OSAP1_TerApp_D_Task3
+        - /Ecuc/Os/T_OSAP1_TerApp_E_Task2
+      OsAppIsrRef:
+        - /Ecuc/Os/T_OSAP1_TerApp_F_Isr2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+      TFN_TFN_1:
+        DefinitionRef: OsApplicationTrustedFunction
+        OsTrustedFunctionName: TRUSTED_tfn_tfn1
+      TFN_TFN_2:
+        DefinitionRef: OsApplicationTrustedFunction
+        OsTrustedFunctionName: TRUSTED_tfn_tfn2
+      TRIGGER_TERAPP_ISR2_TFN1:
+        DefinitionRef: OsApplicationTrustedFunction
+        OsTrustedFunctionName: TRUSTED_terapp_isr2_tfn1
+      CHKMEM_TFN1:
+        DefinitionRef: OsApplicationTrustedFunction
+        OsTrustedFunctionName: TRUSTED_ChkMem_tfn1
+    NT_OSAP1:
+      DefinitionRef: OsApplication
+      OsTrusted: false
+      OsAppTaskRef:
+        - /Ecuc/Os/NT_OSAP1_Tfn_Task1
+        - /Ecuc/Os/NT_OSAP1_ChkMem_Task1
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    NT_OSAP1_TERAPP_C:
+      DefinitionRef: OsApplication
+      OsTrusted: false
+      OsAppTaskRef:
+        - /Ecuc/Os/NT_OSAP1_TerApp_C_Task1
+        - /Ecuc/Os/NT_OSAP1_TerApp_C_ReTask2
+        - /Ecuc/Os/NT_OSAP1_TerApp_C_Task3
+      OsRestartTask:
+        - /Ecuc/Os/NT_OSAP1_TerApp_C_ReTask2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    NT_OSAP1_TERAPP_D:
+      DefinitionRef: OsApplication
+      OsTrusted: false
+      OsAppTaskRef:
+        - /Ecuc/Os/NT_OSAP1_TerApp_D_Task1
+        - /Ecuc/Os/NT_OSAP1_TerApp_D_ReTask2
+      OsRestartTask:
+        - /Ecuc/Os/NT_OSAP1_TerApp_D_ReTask2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    NT_OSAP1_TERAPP_E:
+      DefinitionRef: OsApplication
+      OsTrusted: false
+      OsAppTaskRef:
+        - /Ecuc/Os/NT_OSAP1_TerApp_E_Task1
+        - /Ecuc/Os/NT_OSAP1_TerApp_E_ReTask3
+        - /Ecuc/Os/NT_OSAP1_TerApp_E_ResetTask
+      OsRestartTask:
+        - /Ecuc/Os/NT_OSAP1_TerApp_E_ReTask3
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    NT_OSAP1_TERAPP_F:
+      DefinitionRef: OsApplication
+      OsTrusted: false
+      OsAppTaskRef:
+        - /Ecuc/Os/NT_OSAP1_TerApp_F_Task1
+        - /Ecuc/Os/NT_OSAP1_TerApp_F_ReTask2
+      OsRestartTask:
+        - /Ecuc/Os/NT_OSAP1_TerApp_F_ReTask2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    T_OSAP2:
+      DefinitionRef: OsApplication
+      OsTrusted: true
+      OsAppTaskRef:
+        - /Ecuc/Os/T_OSAP2_TerApp_D_Task3
+        - /Ecuc/Os/T_OSAP2_TerApp_E_Task2
+      OsAppIsrRef:
+        - /Ecuc/Os/T_OSAP2_TerApp_F_Isr2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+      TRIGGER_TERAPP_ISR2_TFN2:
+        DefinitionRef: OsApplicationTrustedFunction
+        OsTrustedFunctionName: TRUSTED_terapp_isr2_tfn2
+    NT_OSAP2_TERAPP_C:
+      DefinitionRef: OsApplication
+      OsTrusted: false
+      OsAppTaskRef:
+        - /Ecuc/Os/NT_OSAP2_TerApp_C_Task1
+        - /Ecuc/Os/NT_OSAP2_TerApp_C_ReTask2
+        - /Ecuc/Os/NT_OSAP2_TerApp_C_Task3
+        - /Ecuc/Os/NT_OSAP2_TerApp_C_Task4
+        - /Ecuc/Os/NT_OSAP2_TerApp_C_Task5
+        - /Ecuc/Os/NT_OSAP2_TerApp_C_Task6
+      OsRestartTask:
+        - /Ecuc/Os/NT_OSAP2_TerApp_C_ReTask2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    NT_OSAP2_TERAPP_D:
+      DefinitionRef: OsApplication
+      OsTrusted: false
+      OsAppTaskRef:
+        - /Ecuc/Os/NT_OSAP2_TerApp_D_Task1
+        - /Ecuc/Os/NT_OSAP2_TerApp_D_ReTask2
+        - /Ecuc/Os/NT_OSAP2_TerApp_D_Task4
+        - /Ecuc/Os/NT_OSAP2_TerApp_D_Task5
+        - /Ecuc/Os/NT_OSAP2_TerApp_D_Task6
+      OsRestartTask:
+        - /Ecuc/Os/NT_OSAP2_TerApp_D_ReTask2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    NT_OSAP2_TERAPP_E:
+      DefinitionRef: OsApplication
+      OsTrusted: false
+      OsAppTaskRef:
+        - /Ecuc/Os/NT_OSAP2_TerApp_E_Task1
+        - /Ecuc/Os/NT_OSAP2_TerApp_E_ReTask3
+        - /Ecuc/Os/NT_OSAP2_TerApp_E_ResetTask
+        - /Ecuc/Os/NT_OSAP2_TerApp_E_Task4
+        - /Ecuc/Os/NT_OSAP2_TerApp_E_Task5
+        - /Ecuc/Os/NT_OSAP2_TerApp_E_Task6
+      OsRestartTask:
+        - /Ecuc/Os/NT_OSAP2_TerApp_E_ReTask3
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    NT_OSAP2_TERAPP_F:
+      DefinitionRef: OsApplication
+      OsTrusted: false
+      OsAppTaskRef:
+        - /Ecuc/Os/NT_OSAP2_TerApp_F_Task1
+        - /Ecuc/Os/NT_OSAP2_TerApp_F_ReTask2
+        - /Ecuc/Os/NT_OSAP2_TerApp_F_Task3
+        - /Ecuc/Os/NT_OSAP2_TerApp_F_Task4
+        - /Ecuc/Os/NT_OSAP2_TerApp_F_Task5
+      OsRestartTask:
+        - /Ecuc/Os/NT_OSAP2_TerApp_F_ReTask2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    T_OSAP3:
+      DefinitionRef: OsApplication
+      OsTrusted: true
+      OsAppTaskRef:
+        - /Ecuc/Os/T_OSAP3_TerApp_D_Task3
+        - /Ecuc/Os/T_OSAP3_TerApp_E_Task2
+      OsAppIsrRef:
+        - /Ecuc/Os/T_OSAP3_TerApp_F_Isr2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+      TRIGGER_TERAPP_ISR2_TFN3:
+        DefinitionRef: OsApplicationTrustedFunction
+        OsTrustedFunctionName: TRUSTED_terapp_isr2_tfn3
+    NT_OSAP3_TERAPP_C:
+      DefinitionRef: OsApplication
+      OsTrusted: false
+      OsAppTaskRef:
+        - /Ecuc/Os/NT_OSAP3_TerApp_C_Task1
+        - /Ecuc/Os/NT_OSAP3_TerApp_C_ReTask2
+        - /Ecuc/Os/NT_OSAP3_TerApp_C_Task3
+        - /Ecuc/Os/NT_OSAP3_TerApp_C_Task4
+        - /Ecuc/Os/NT_OSAP3_TerApp_C_Task5
+        - /Ecuc/Os/NT_OSAP3_TerApp_C_Task6
+        - /Ecuc/Os/NT_OSAP3_TerApp_C_Task7
+        - /Ecuc/Os/NT_OSAP3_TerApp_C_Task8
+        - /Ecuc/Os/NT_OSAP3_TerApp_C_Task9
+        - /Ecuc/Os/NT_OSAP3_TerApp_C_Task10
+      OsRestartTask:
+        - /Ecuc/Os/NT_OSAP3_TerApp_C_ReTask2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    NT_OSAP3_TERAPP_D:
+      DefinitionRef: OsApplication
+      OsTrusted: false
+      OsAppTaskRef:
+        - /Ecuc/Os/NT_OSAP3_TerApp_D_Task1
+        - /Ecuc/Os/NT_OSAP3_TerApp_D_ReTask2
+        - /Ecuc/Os/NT_OSAP3_TerApp_D_Task4
+        - /Ecuc/Os/NT_OSAP3_TerApp_D_Task5
+        - /Ecuc/Os/NT_OSAP3_TerApp_D_Task6
+        - /Ecuc/Os/NT_OSAP3_TerApp_D_Task7
+        - /Ecuc/Os/NT_OSAP3_TerApp_D_Task8
+        - /Ecuc/Os/NT_OSAP3_TerApp_D_Task9
+        - /Ecuc/Os/NT_OSAP3_TerApp_D_Task10
+      OsRestartTask:
+        - /Ecuc/Os/NT_OSAP3_TerApp_D_ReTask2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    NT_OSAP3_TERAPP_E:
+      DefinitionRef: OsApplication
+      OsTrusted: false
+      OsAppTaskRef:
+        - /Ecuc/Os/NT_OSAP3_TerApp_E_Task1
+        - /Ecuc/Os/NT_OSAP3_TerApp_E_ReTask3
+        - /Ecuc/Os/NT_OSAP3_TerApp_E_ResetTask
+        - /Ecuc/Os/NT_OSAP3_TerApp_E_Task4
+        - /Ecuc/Os/NT_OSAP3_TerApp_E_Task5
+        - /Ecuc/Os/NT_OSAP3_TerApp_E_Task6
+        - /Ecuc/Os/NT_OSAP3_TerApp_E_Task7
+        - /Ecuc/Os/NT_OSAP3_TerApp_E_Task8
+        - /Ecuc/Os/NT_OSAP3_TerApp_E_Task9
+        - /Ecuc/Os/NT_OSAP3_TerApp_E_Task10
+      OsRestartTask:
+        - /Ecuc/Os/NT_OSAP3_TerApp_E_ReTask3
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    NT_OSAP3_TERAPP_F:
+      DefinitionRef: OsApplication
+      OsTrusted: false
+      OsAppTaskRef:
+        - /Ecuc/Os/NT_OSAP3_TerApp_F_Task1
+        - /Ecuc/Os/NT_OSAP3_TerApp_F_ReTask2
+        - /Ecuc/Os/NT_OSAP3_TerApp_F_Task3
+        - /Ecuc/Os/NT_OSAP3_TerApp_F_Task4
+        - /Ecuc/Os/NT_OSAP3_TerApp_F_Task5
+        - /Ecuc/Os/NT_OSAP3_TerApp_F_Task6
+        - /Ecuc/Os/NT_OSAP3_TerApp_F_Task7
+        - /Ecuc/Os/NT_OSAP3_TerApp_F_Task8
+        - /Ecuc/Os/NT_OSAP3_TerApp_F_Task9
+      OsRestartTask:
+        - /Ecuc/Os/NT_OSAP3_TerApp_F_ReTask2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    T_OSAP4:
+      DefinitionRef: OsApplication
+      OsTrusted: true
+      OsAppTaskRef:
+        - /Ecuc/Os/T_OSAP4_TerApp_D_Task3
+        - /Ecuc/Os/T_OSAP4_TerApp_E_Task2
+      OsAppIsrRef:
+        - /Ecuc/Os/T_OSAP4_TerApp_F_Isr2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+      TRIGGER_TERAPP_ISR2_TFN4:
+        DefinitionRef: OsApplicationTrustedFunction
+        OsTrustedFunctionName: TRUSTED_terapp_isr2_tfn4
+    NT_OSAP4_TERAPP_C:
+      DefinitionRef: OsApplication
+      OsTrusted: false
+      OsAppTaskRef:
+        - /Ecuc/Os/NT_OSAP4_TerApp_C_Task1
+        - /Ecuc/Os/NT_OSAP4_TerApp_C_ReTask2
+        - /Ecuc/Os/NT_OSAP4_TerApp_C_Task3
+        - /Ecuc/Os/NT_OSAP4_TerApp_C_Task4
+        - /Ecuc/Os/NT_OSAP4_TerApp_C_Task5
+        - /Ecuc/Os/NT_OSAP4_TerApp_C_Task6
+        - /Ecuc/Os/NT_OSAP4_TerApp_C_Task7
+        - /Ecuc/Os/NT_OSAP4_TerApp_C_Task8
+        - /Ecuc/Os/NT_OSAP4_TerApp_C_Task9
+        - /Ecuc/Os/NT_OSAP4_TerApp_C_Task10
+        - /Ecuc/Os/NT_OSAP4_TerApp_C_Task11
+        - /Ecuc/Os/NT_OSAP4_TerApp_C_Task12
+        - /Ecuc/Os/NT_OSAP4_TerApp_C_Task13
+        - /Ecuc/Os/NT_OSAP4_TerApp_C_Task14
+        - /Ecuc/Os/NT_OSAP4_TerApp_C_Task15
+        - /Ecuc/Os/NT_OSAP4_TerApp_C_Task16
+        - /Ecuc/Os/NT_OSAP4_TerApp_C_Task17
+        - /Ecuc/Os/NT_OSAP4_TerApp_C_Task18
+      OsRestartTask:
+        - /Ecuc/Os/NT_OSAP4_TerApp_C_ReTask2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    NT_OSAP4_TERAPP_D:
+      DefinitionRef: OsApplication
+      OsTrusted: false
+      OsAppTaskRef:
+        - /Ecuc/Os/NT_OSAP4_TerApp_D_Task1
+        - /Ecuc/Os/NT_OSAP4_TerApp_D_ReTask2
+        - /Ecuc/Os/NT_OSAP4_TerApp_D_Task4
+        - /Ecuc/Os/NT_OSAP4_TerApp_D_Task5
+        - /Ecuc/Os/NT_OSAP4_TerApp_D_Task6
+        - /Ecuc/Os/NT_OSAP4_TerApp_D_Task7
+        - /Ecuc/Os/NT_OSAP4_TerApp_D_Task8
+        - /Ecuc/Os/NT_OSAP4_TerApp_D_Task9
+        - /Ecuc/Os/NT_OSAP4_TerApp_D_Task10
+        - /Ecuc/Os/NT_OSAP4_TerApp_D_Task11
+        - /Ecuc/Os/NT_OSAP4_TerApp_D_Task12
+        - /Ecuc/Os/NT_OSAP4_TerApp_D_Task13
+        - /Ecuc/Os/NT_OSAP4_TerApp_D_Task14
+        - /Ecuc/Os/NT_OSAP4_TerApp_D_Task15
+        - /Ecuc/Os/NT_OSAP4_TerApp_D_Task16
+        - /Ecuc/Os/NT_OSAP4_TerApp_D_Task17
+        - /Ecuc/Os/NT_OSAP4_TerApp_D_Task18
+      OsRestartTask:
+        - /Ecuc/Os/NT_OSAP4_TerApp_D_ReTask2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    NT_OSAP4_TERAPP_E:
+      DefinitionRef: OsApplication
+      OsTrusted: false
+      OsAppTaskRef:
+        - /Ecuc/Os/NT_OSAP4_TerApp_E_Task1
+        - /Ecuc/Os/NT_OSAP4_TerApp_E_ReTask3
+        - /Ecuc/Os/NT_OSAP4_TerApp_E_ResetTask
+        - /Ecuc/Os/NT_OSAP4_TerApp_E_Task4
+        - /Ecuc/Os/NT_OSAP4_TerApp_E_Task5
+        - /Ecuc/Os/NT_OSAP4_TerApp_E_Task6
+        - /Ecuc/Os/NT_OSAP4_TerApp_E_Task7
+        - /Ecuc/Os/NT_OSAP4_TerApp_E_Task8
+        - /Ecuc/Os/NT_OSAP4_TerApp_E_Task9
+        - /Ecuc/Os/NT_OSAP4_TerApp_E_Task10
+        - /Ecuc/Os/NT_OSAP4_TerApp_E_Task11
+        - /Ecuc/Os/NT_OSAP4_TerApp_E_Task12
+        - /Ecuc/Os/NT_OSAP4_TerApp_E_Task13
+        - /Ecuc/Os/NT_OSAP4_TerApp_E_Task14
+        - /Ecuc/Os/NT_OSAP4_TerApp_E_Task15
+        - /Ecuc/Os/NT_OSAP4_TerApp_E_Task16
+        - /Ecuc/Os/NT_OSAP4_TerApp_E_Task17
+        - /Ecuc/Os/NT_OSAP4_TerApp_E_Task18
+      OsRestartTask:
+        - /Ecuc/Os/NT_OSAP4_TerApp_E_ReTask3
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    NT_OSAP4_TERAPP_F:
+      DefinitionRef: OsApplication
+      OsTrusted: false
+      OsAppTaskRef:
+        - /Ecuc/Os/NT_OSAP4_TerApp_F_Task1
+        - /Ecuc/Os/NT_OSAP4_TerApp_F_ReTask2
+        - /Ecuc/Os/NT_OSAP4_TerApp_F_Task3
+        - /Ecuc/Os/NT_OSAP4_TerApp_F_Task4
+        - /Ecuc/Os/NT_OSAP4_TerApp_F_Task5
+        - /Ecuc/Os/NT_OSAP4_TerApp_F_Task6
+        - /Ecuc/Os/NT_OSAP4_TerApp_F_Task7
+        - /Ecuc/Os/NT_OSAP4_TerApp_F_Task8
+        - /Ecuc/Os/NT_OSAP4_TerApp_F_Task9
+        - /Ecuc/Os/NT_OSAP4_TerApp_F_Task10
+        - /Ecuc/Os/NT_OSAP4_TerApp_F_Task11
+        - /Ecuc/Os/NT_OSAP4_TerApp_F_Task12
+        - /Ecuc/Os/NT_OSAP4_TerApp_F_Task13
+        - /Ecuc/Os/NT_OSAP4_TerApp_F_Task14
+        - /Ecuc/Os/NT_OSAP4_TerApp_F_Task15
+        - /Ecuc/Os/NT_OSAP4_TerApp_F_Task16
+        - /Ecuc/Os/NT_OSAP4_TerApp_F_Task17
+      OsRestartTask:
+        - /Ecuc/Os/NT_OSAP4_TerApp_F_ReTask2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false

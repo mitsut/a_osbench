@@ -1,0 +1,1136 @@
+#
+#  TOPPERS/A-OSBENCH
+#      Toyohashi Open Platform for Embedded Real-Time Systems
+#      Automotive Operating System Benchmark
+#
+#  Copyright (C) 2014 by Center for Embedded Computing Systems
+#              Graduate School of Information Science, Nagoya Univ., JAPAN
+#  Copyright (C) 2014 by FUJISOFT INCORPORATED, JAPAN
+#  Copyright (C) 2014 by Sunny Giken Inc., JAPAN
+#
+#  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
+#  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
+#  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
+#  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
+#      権表示，この利用条件および下記の無保証規定が，そのままの形でソー
+#      スコード中に含まれていること．
+#  (2) 本ソフトウェアを，ライブラリ形式など，他のソフトウェア開発に使
+#      用できる形で再配布する場合には，再配布に伴うドキュメント（利用
+#      者マニュアルなど）に，上記の著作権表示，この利用条件および下記
+#      の無保証規定を掲載すること．
+#  (3) 本ソフトウェアを，機器に組み込むなど，他のソフトウェア開発に使
+#      用できない形で再配布する場合には，次のいずれかの条件を満たすこ
+#      と．
+#    (a) 再配布に伴うドキュメント（利用者マニュアルなど）に，上記の著
+#        作権表示，この利用条件および下記の無保証規定を掲載すること．
+#    (b) 再配布の形態を，別に定める方法によって，TOPPERSプロジェクトに
+#        報告すること．
+#  (4) 本ソフトウェアの利用により直接的または間接的に生じるいかなる損
+#      害からも，上記著作権者およびTOPPERSプロジェクトを免責すること．
+#      また，本ソフトウェアのユーザまたはエンドユーザからのいかなる理
+#      由に基づく請求からも，上記著作権者およびTOPPERSプロジェクトを
+#      免責すること．
+#
+#  本ソフトウェアは，AUTOSAR（AUTomotive Open System ARchitecture）仕
+#  様に基づいている．上記の許諾は，AUTOSARの知的財産権を許諾するもので
+#  はない．AUTOSARは，AUTOSAR仕様に基づいたソフトウェアを商用目的で利
+#  用する者に対して，AUTOSARパートナーになることを求めている．
+#
+#  本ソフトウェアは，無保証で提供されているものである．上記著作権者お
+#  よびTOPPERSプロジェクトは，本ソフトウェアに関して，特定の使用目的
+#  に対する適合性も含めて，いかなる保証も行わない．また，本ソフトウェ
+#  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
+#  の責任を負わない．
+#
+#  $Id: perf_general.yaml 646 2016-05-06 05:07:47Z ertl-honda $
+#
+
+Ecuc:
+  Os:
+    OsInclude1:
+      DefinitionRef: OsInclude
+      OsIncludeFileName: perf_general.h
+    OsInclude2:
+      DefinitionRef: OsInclude
+      OsIncludeFileName: test_target_lib.h
+    OsInclude3:
+      DefinitionRef: OsInclude
+      OsIncludeFileName: perf_general_nt.h
+    OsOS:
+      OsNumberOfCores: 2
+      OsStackMonitoring: false
+      OsUseGetServiceId: true
+      OsUseParameterAccess: true
+      OsScalabilityClass: SC3
+      OsStatus: EXTENDED
+      OsHooks:
+        OsErrorHook: true
+        OsPostTaskHook: false
+        OsPreTaskHook: false
+        OsProtectionHook: true
+        OsShutdownHook: false
+        OsStartupHook: false
+    MainApp:
+      DefinitionRef: OsAppMode
+    Event_T2Evt:
+      DefinitionRef: OsEvent
+      OsEventMask: EVENT_T2_MASK
+    Event_T2SetEvt:
+      DefinitionRef: OsEvent
+      OsEventMask: SETEVENT_T2_MASK
+    Event_T3Evt:
+      DefinitionRef: OsEvent
+      OsEventMask: EVENT_T3_MASK
+    Event_MC_T3Evt:
+      DefinitionRef: OsEvent
+      OsEventMask: EVENT_MC_T3_MASK
+    NT_Event_T2Evt:
+      DefinitionRef: OsEvent
+      OsEventMask: NT_EVENT_T2_MASK
+    NT_Event_T2SetEvt:
+      DefinitionRef: OsEvent
+      OsEventMask: NT_SETEVENT_T2_MASK
+    NT_Event_T3Evt:
+      DefinitionRef: OsEvent
+      OsEventMask: NT_EVENT_T3_MASK
+    NT_Event_MC_T3Evt:
+      DefinitionRef: OsEvent
+      OsEventMask: NT_EVENT_MC_T3_MASK
+    TskLevelRes:
+      DefinitionRef: OsResource
+      OsResourceProperty: STANDARD
+    IsrLevelRes:
+      DefinitionRef: OsResource
+      OsResourceProperty: STANDARD
+    NT_TskLevelRes:
+      DefinitionRef: OsResource
+      OsResourceProperty: STANDARD
+      OsResourceAccessingApplication: /Ecuc/Os/NT_OSAP1
+    NT_IsrLevelRes:
+      DefinitionRef: OsResource
+      OsResourceProperty: STANDARD
+      OsResourceAccessingApplication: /Ecuc/Os/NT_OSAP1
+    Spin_MC_Spinlock1:
+      DefinitionRef: OsSpinlock
+      OsSpinlockLockMethod: LOCK_NOTHING
+      OsSpinlockAccessingApplication:
+        - /Ecuc/Os/T_OSAP1_M
+        - /Ecuc/Os/T_OSAP2_S
+    Int_MC_Spinlock1:
+      DefinitionRef: OsSpinlock
+      OsSpinlockLockMethod: LOCK_NOTHING
+      OsSpinlockAccessingApplication:
+        - /Ecuc/Os/T_OSAP1_M
+        - /Ecuc/Os/T_OSAP2_S
+    Spin_MC_Spinlock2:
+      DefinitionRef: OsSpinlock
+      OsSpinlockLockMethod: LOCK_NOTHING
+      OsSpinlockAccessingApplication:
+        - /Ecuc/Os/NT_OSAP1
+        - /Ecuc/Os/NT_OSAP2_S
+    Int_MC_Spinlock2:
+      DefinitionRef: OsSpinlock
+      OsSpinlockLockMethod: LOCK_NOTHING
+      OsSpinlockAccessingApplication:
+        - /Ecuc/Os/NT_OSAP1
+        - /Ecuc/Os/NT_OSAP2_S
+    Act_Isr2:
+      DefinitionRef: OsIsr
+      OsIsrCategory: CATEGORY_2
+      OsIsrInterruptNumber: INTNO_ACTISR2_1
+      OsIsrInterruptSource: ENABLE
+      OsIsrInterruptPriority: INTPRI_TIMER_NUM
+      OsIsrStackSize: ISR_STACK_SIZE
+    Resource_Isr2:
+      DefinitionRef: OsIsr
+      OsIsrCategory: CATEGORY_2
+      OsIsrInterruptNumber: INTNO_RESOURCE
+      OsIsrInterruptSource: ENABLE
+      OsIsrInterruptPriority: INTPRI_TIMER_NUM
+      OsIsrStackSize: ISR_STACK_SIZE
+      OsIsrResourceRef:
+        - /Ecuc/Os/IsrLevelRes
+        - /Ecuc/Os/NT_IsrLevelRes
+    SetE_Isr2:
+      DefinitionRef: OsIsr
+      OsIsrCategory: CATEGORY_2
+      OsIsrInterruptNumber: INTNO_SET_EVENT_1
+      OsIsrInterruptSource: ENABLE
+      OsIsrInterruptPriority: INTPRI_TIMER_NUM
+      OsIsrStackSize: ISR_STACK_SIZE
+      OsIsrResourceRef:
+        - /Ecuc/Os/TskLevelRes
+        - /Ecuc/Os/IsrLevelRes
+    Int_A_Isr2:
+      DefinitionRef: OsIsr
+      OsIsrCategory: CATEGORY_2
+      OsIsrInterruptNumber: INTNO_INT_A_TIMER
+      OsIsrInterruptSource: ENABLE
+      OsIsrInterruptPriority: INTPRI_TIMER_NUM
+      OsIsrStackSize: ISR_STACK_SIZE
+    Int_B_Isr2:
+      DefinitionRef: OsIsr
+      OsIsrCategory: CATEGORY_2
+      OsIsrInterruptNumber: INTNO_INT_B_TIMER
+      OsIsrInterruptSource: ENABLE
+      OsIsrInterruptPriority: INTPRI_TIMER_NUM
+      OsIsrStackSize: ISR_STACK_SIZE
+    OSAP1_M_Int_MC_Isr2:
+      DefinitionRef: OsIsr
+      OsIsrCategory: CATEGORY_2
+      OsIsrInterruptNumber: INTNO_INT_MC_TIMER
+      OsIsrInterruptSource: ENABLE
+      OsIsrInterruptPriority: INTPRI_TIMER_NUM
+      OsIsrStackSize: ISR_STACK_SIZE
+    T_OSAP2_Act_Isr2:
+      DefinitionRef: OsIsr
+      OsIsrCategory: CATEGORY_2
+      OsIsrInterruptNumber: INTNO_ACTISR2_2
+      OsIsrInterruptSource: ENABLE
+      OsIsrInterruptPriority: INTPRI_TIMER_NUM
+      OsIsrStackSize: ISR_STACK_SIZE
+    T_OSAP2_SetE_Isr2:
+      DefinitionRef: OsIsr
+      OsIsrCategory: CATEGORY_2
+      OsIsrInterruptNumber: INTNO_SET_EVENT_2
+      OsIsrInterruptSource: ENABLE
+      OsIsrInterruptPriority: INTPRI_TIMER_NUM
+      OsIsrStackSize: ISR_STACK_SIZE
+    IOC:
+      DefinitionRef: OsIoc
+      IOC_QUEUE_OSAP1:
+        DefinitionRef: OsIocCommunication
+        OsIocBufferLength: 1
+        IOC_QUEUE_OSAP1_DATA:
+          OsIocDataPropertyIndex: 0
+          DefinitionRef: OsIocDataProperties
+          OsIocInitValue: 10U
+          OsIocDataTypeRef: /ImplementationDataTypes/uint8
+        IOC_QUEUE_OSAP1_RCV:
+          DefinitionRef: OsIocReceiverProperties
+          OsIocFunctionImplementationKind: FUNCTION
+          OsIocReceivingOsApplicationRef: /Ecuc/Os/T_OSAP2
+        IOC_QUEUE_OSAP1_SND:
+          DefinitionRef: OsIocSenderProperties
+          OsIocFunctionImplementationKind: FUNCTION
+          OsIocSendingOsApplicationRef: /Ecuc/Os/T_OSAP1
+      IOC_DEQUEUE_OSAP1:
+        DefinitionRef: OsIocCommunication
+        IOC_DEQUEUE_OSAP1_DATA:
+          DefinitionRef: OsIocDataProperties
+          OsIocDataPropertyIndex: 0
+          OsIocInitValue: 10U
+          OsIocDataTypeRef: /ImplementationDataTypes/uint8
+        IOC_DEQUEUE_OSAP1_RCV:
+          DefinitionRef: OsIocReceiverProperties
+          OsIocFunctionImplementationKind: FUNCTION
+          OsIocReceivingOsApplicationRef: /Ecuc/Os/T_OSAP2
+        IOC_DEQUEUE_OSAP1_SND:
+          DefinitionRef: OsIocSenderProperties
+          OsIocFunctionImplementationKind: FUNCTION
+          OsIocSendingOsApplicationRef: /Ecuc/Os/T_OSAP1
+      IOC_QUEUE_NTOSAP1:
+        DefinitionRef: OsIocCommunication
+        OsIocBufferLength: 1
+        IOC_QUEUE_NTOSAP1_DATA:
+          OsIocDataPropertyIndex: 0
+          DefinitionRef: OsIocDataProperties
+          OsIocInitValue: 10U
+          OsIocDataTypeRef: /ImplementationDataTypes/uint8
+        IOC_QUEUE_NTOSAP1_RCV:
+          DefinitionRef: OsIocReceiverProperties
+          OsIocFunctionImplementationKind: FUNCTION
+          OsIocReceivingOsApplicationRef: /Ecuc/Os/NT_OSAP2
+        IOC_QUEUE_NTOSAP1_SND:
+          DefinitionRef: OsIocSenderProperties
+          OsIocFunctionImplementationKind: FUNCTION
+          OsIocSendingOsApplicationRef: /Ecuc/Os/NT_OSAP1
+      IOC_DEQUEUE_NTOSAP1:
+        DefinitionRef: OsIocCommunication
+        IOC_DEQUEUE_NTOSAP1_DATA:
+          DefinitionRef: OsIocDataProperties
+          OsIocDataPropertyIndex: 0
+          OsIocInitValue: 10U
+          OsIocDataTypeRef: /ImplementationDataTypes/uint8
+        IOC_DEQUEUE_NTOSAP1_RCV:
+          DefinitionRef: OsIocReceiverProperties
+          OsIocFunctionImplementationKind: FUNCTION
+          OsIocReceivingOsApplicationRef: /Ecuc/Os/NT_OSAP2
+        IOC_DEQUEUE_NTOSAP1_SND:
+          DefinitionRef: OsIocSenderProperties
+          OsIocFunctionImplementationKind: FUNCTION
+          OsIocSendingOsApplicationRef: /Ecuc/Os/NT_OSAP1
+      IOC_QUEUE_OSAP1_M:
+        DefinitionRef: OsIocCommunication
+        OsIocBufferLength: 1
+        IOC_QUEUE_OSAP1_M_DATA:
+          OsIocDataPropertyIndex: 0
+          DefinitionRef: OsIocDataProperties
+          OsIocInitValue: 10U
+          OsIocDataTypeRef: /ImplementationDataTypes/uint8
+        IOC_QUEUE_OSAP1_M_RCV:
+          DefinitionRef: OsIocReceiverProperties
+          OsIocFunctionImplementationKind: FUNCTION
+          OsIocReceivingOsApplicationRef: /Ecuc/Os/T_OSAP2_S
+        IOC_QUEUE_OSAP1_M_SND:
+          DefinitionRef: OsIocSenderProperties
+          OsIocFunctionImplementationKind: FUNCTION
+          OsIocSendingOsApplicationRef: /Ecuc/Os/T_OSAP1_M
+      IOC_DEQUEUE_OSAP1_M:
+        DefinitionRef: OsIocCommunication
+        IOC_DEQUEUE_OSAP1_M_DATA:
+          DefinitionRef: OsIocDataProperties
+          OsIocDataPropertyIndex: 0
+          OsIocInitValue: 10U
+          OsIocDataTypeRef: /ImplementationDataTypes/uint8
+        IOC_DEQUEUE_OSAP1_M_RCV:
+          DefinitionRef: OsIocReceiverProperties
+          OsIocFunctionImplementationKind: FUNCTION
+          OsIocReceivingOsApplicationRef: /Ecuc/Os/T_OSAP2_S
+        IOC_DEQUEUE_OSAP1_M_SND:
+          DefinitionRef: OsIocSenderProperties
+          OsIocFunctionImplementationKind: FUNCTION
+          OsIocSendingOsApplicationRef: /Ecuc/Os/T_OSAP1_M
+      IOC_QUEUE_NTOSAP1_M:
+        DefinitionRef: OsIocCommunication
+        OsIocBufferLength: 1
+        IOC_QUEUE_NTOSAP1_M_DATA:
+          OsIocDataPropertyIndex: 0
+          DefinitionRef: OsIocDataProperties
+          OsIocInitValue: 10U
+          OsIocDataTypeRef: /ImplementationDataTypes/uint8
+        IOC_QUEUE_NTOSAP1_M_RCV:
+          DefinitionRef: OsIocReceiverProperties
+          OsIocFunctionImplementationKind: FUNCTION
+          OsIocReceivingOsApplicationRef: /Ecuc/Os/NT_OSAP2_S
+        IOC_QUEUE_NTOSAP1_M_SND:
+          DefinitionRef: OsIocSenderProperties
+          OsIocFunctionImplementationKind: FUNCTION
+          OsIocSendingOsApplicationRef: /Ecuc/Os/NT_OSAP1
+      IOC_DEQUEUE_NTOSAP1_M:
+        DefinitionRef: OsIocCommunication
+        IOC_DEQUEUE_NTOSAP1_M_DATA:
+          DefinitionRef: OsIocDataProperties
+          OsIocDataPropertyIndex: 0
+          OsIocInitValue: 10U
+          OsIocDataTypeRef: /ImplementationDataTypes/uint8
+        IOC_DEQUEUE_NTOSAP1_M_RCV:
+          DefinitionRef: OsIocReceiverProperties
+          OsIocFunctionImplementationKind: FUNCTION
+          OsIocReceivingOsApplicationRef: /Ecuc/Os/NT_OSAP2_S
+        IOC_DEQUEUE_NTOSAP1_M_SND:
+          DefinitionRef: OsIocSenderProperties
+          OsIocFunctionImplementationKind: FUNCTION
+          OsIocSendingOsApplicationRef: /Ecuc/Os/NT_OSAP1
+    MainTask:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 1
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskAutostart:
+        OsTaskAppModeRef: /Ecuc/Os/MainApp
+    Act_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    Act_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    Act_Task3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    Act_Task4:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 5
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    Ter_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    Ter_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    Chain_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    Chain_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    Interrupt_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    Resource_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskResourceRef:
+        - /Ecuc/Os/TskLevelRes
+        - /Ecuc/Os/IsrLevelRes
+    Resource_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskResourceRef:
+        - /Ecuc/Os/TskLevelRes
+    Event_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    Event_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskEventRef:
+        - /Ecuc/Os/Event_T2Evt
+    SetE_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    SetE_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskEventRef:
+        - /Ecuc/Os/Event_T2SetEvt
+    SetE_Task3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskEventRef:
+        - /Ecuc/Os/Event_T3Evt
+    Int_A_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    Int_B_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    Int_B_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    PrintTask:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    OSAP1_IOC_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_Act_Task1_ntnt:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_Act_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_Act_Task3_ntnt:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_Act_Task1_tnt:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_Act_Task3_tnt1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_Act_Task3_tnt2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_Act_Task4:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 5
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_Act_ResetTask:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 5
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_Ter_ResetTask:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_Ter_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_Ter_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_Chain_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_Chain_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_Chain_ResetTask:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_Resource_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskResourceRef:
+        - /Ecuc/Os/NT_TskLevelRes
+        - /Ecuc/Os/NT_IsrLevelRes
+    NT_OSAP1_Resource_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskResourceRef:
+        - /Ecuc/Os/NT_TskLevelRes
+    NT_OSAP1_Event_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_Event_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskEventRef:
+        - /Ecuc/Os/NT_Event_T2Evt
+    NT_OSAP1_SetE_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_SetE_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskEventRef:
+        - /Ecuc/Os/NT_Event_T2SetEvt
+    NT_OSAP1_SetE_Task3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskEventRef:
+        - /Ecuc/Os/NT_Event_T3Evt
+    NT_OSAP1_Int_A_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_Int_B_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_IOC_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskAccessingApplication: /Ecuc/Os/NT_OSAP2
+    OSAP1_M_Act_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    OSAP1_M_SetE_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    OSAP1_M_Spin_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    OSAP1_M_Int_MC_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    OSAP1_M_IOC_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_M_Act_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskAccessingApplication: /Ecuc/Os/NT_OSAP2_S
+    NT_OSAP1_M_SetE_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskAccessingApplication: /Ecuc/Os/NT_OSAP2_S
+    NT_OSAP1_M_Int_MC_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_M_Spin_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP1_M_IOC_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    T_OSAP2_Act_Task2_tnt1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    T_OSAP2_Act_Task2_tnt2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    T_OSAP2_Ter_Task2_1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    T_OSAP2_Ter_Task2_2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    T_OSAP2_Chain_Task1_1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    T_OSAP2_Chain_Task1_2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    OSAP2_IOC_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_Act_ResetTask:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 5
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskAccessingApplication: /Ecuc/Os/NT_OSAP1
+    NT_OSAP2_Act_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskAccessingApplication: /Ecuc/Os/NT_OSAP3
+    NT_OSAP2_Act_Task3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskAccessingApplication: /Ecuc/Os/NT_OSAP3
+    NT_OSAP2_Ter_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_Ter_ResetTask:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_Chain_ResetTask:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_Chain_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_Int_B_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_IOC_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskAccessingApplication: /Ecuc/Os/NT_OSAP1
+    OSAP2_S_Act_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    OSAP2_S_Act_Task3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    OSAP2_S_SetE_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    OSAP2_S_SetE_Task3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskEventRef:
+        - /Ecuc/Os/Event_MC_T3Evt
+    OSAP2_S_Int_MC_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    OSAP2_S_IOC_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    NT_OSAP2_S_Act_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskAccessingApplication: /Ecuc/Os/NT_OSAP1
+    NT_OSAP2_S_Act_Task3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskAccessingApplication: /Ecuc/Os/NT_OSAP1
+    NT_OSAP2_S_Act_ResetTask:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 5
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskAccessingApplication: /Ecuc/Os/NT_OSAP1
+    NT_OSAP2_S_SetE_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskAccessingApplication: /Ecuc/Os/NT_OSAP1
+    NT_OSAP2_S_SetE_Task3:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 4
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskAccessingApplication: /Ecuc/Os/NT_OSAP1
+      OsTaskEventRef:
+        - /Ecuc/Os/NT_Event_MC_T3Evt
+    NT_OSAP2_S_Int_MC_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskAccessingApplication: /Ecuc/Os/NT_OSAP1
+    NT_OSAP2_S_IOC_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskAccessingApplication: /Ecuc/Os/NT_OSAP1
+    NT_OSAP3_Act_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskAccessingApplication: /Ecuc/Os/NT_OSAP2
+    NT_OSAP3_Chain_Task2:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 3
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskAccessingApplication: /Ecuc/Os/NT_OSAP2
+    NT_OSAP3_Ter_Task1:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 2
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+      OsTaskAccessingApplication: /Ecuc/Os/NT_OSAP2
+    S_IdleTask:
+      DefinitionRef: OsTask
+      OsTaskActivation: 1
+      OsTaskPriority: 1
+      OsTaskStackSize: TASK_STACK_SIZE
+      OsTaskSchedule: FULL
+    T_OSAP_MAIN:
+      DefinitionRef: OsApplication
+      OsTrusted: true
+      OsApplicationCoreAssignment: OS_CORE_ID_MASTER
+      OsAppTaskRef:
+        - /Ecuc/Os/MainTask
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    T_OSAP1:
+      DefinitionRef: OsApplication
+      OsTrusted: true
+      OsApplicationCoreAssignment: OS_CORE_ID_MASTER
+      OsAppTaskRef:
+        - /Ecuc/Os/Act_Task1
+        - /Ecuc/Os/Act_Task2
+        - /Ecuc/Os/Act_Task3
+        - /Ecuc/Os/Act_Task4
+        - /Ecuc/Os/Ter_Task1
+        - /Ecuc/Os/Ter_Task2
+        - /Ecuc/Os/Chain_Task1
+        - /Ecuc/Os/Chain_Task2
+        - /Ecuc/Os/Interrupt_Task1
+        - /Ecuc/Os/Resource_Task1
+        - /Ecuc/Os/Resource_Task2
+        - /Ecuc/Os/Event_Task1
+        - /Ecuc/Os/Event_Task2
+        - /Ecuc/Os/SetE_Task1
+        - /Ecuc/Os/SetE_Task2
+        - /Ecuc/Os/SetE_Task3
+        - /Ecuc/Os/Int_A_Task1
+        - /Ecuc/Os/Int_B_Task1
+        - /Ecuc/Os/Int_B_Task2
+        - /Ecuc/Os/PrintTask
+        - /Ecuc/Os/OSAP1_IOC_Task1
+      OsAppIsrRef:
+        - /Ecuc/Os/Act_Isr2
+        - /Ecuc/Os/Resource_Isr2
+        - /Ecuc/Os/SetE_Isr2
+        - /Ecuc/Os/Int_A_Isr2
+        - /Ecuc/Os/Int_B_Isr2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+      TRIGGER_RES_ISR2_TFN1:
+        DefinitionRef: OsApplicationTrustedFunction
+        OsTrustedFunctionName: TRUSTED_res_isr2_tfn1
+      INIT_TIMER_INT_A_TFN1:
+        DefinitionRef: OsApplicationTrustedFunction
+        OsTrustedFunctionName: TRUSTED_isr2_a_tfn1
+      TERMINATE_TIMER_INT_A_TFN1:
+        DefinitionRef: OsApplicationTrustedFunction
+        OsTrustedFunctionName: TRUSTED_isr2_a_tfn2
+      INIT_TIMER_INT_B_TFN1:
+        DefinitionRef: OsApplicationTrustedFunction
+        OsTrustedFunctionName: TRUSTED_isr2_b_tfn1
+      TERMINATE_TIMER_INT_B_TFN1:
+        DefinitionRef: OsApplicationTrustedFunction
+        OsTrustedFunctionName: TRUSTED_isr2_b_tfn2
+      SETEVENT_MC_TFN1:
+        DefinitionRef: OsApplicationTrustedFunction
+        OsTrustedFunctionName: TRUSTED_setevent_mc_tfn1
+      SETEVENT_MC_TFN2:
+        DefinitionRef: OsApplicationTrustedFunction
+        OsTrustedFunctionName: TRUSTED_setevent_mc_tfn2
+      SETEVENT_MC_TFN3:
+        DefinitionRef: OsApplicationTrustedFunction
+        OsTrustedFunctionName: TRUSTED_setevent_mc_tfn3
+      ISR2_MC_TFN1:
+        DefinitionRef: OsApplicationTrustedFunction
+        OsTrustedFunctionName: TRUSTED_isr2_mc_tfn1
+      ISR2_MC_TFN2:
+        DefinitionRef: OsApplicationTrustedFunction
+        OsTrustedFunctionName: TRUSTED_isr2_mc_tfn2
+      ISR2_MC_TFN3:
+        DefinitionRef: OsApplicationTrustedFunction
+        OsTrustedFunctionName: TRUSTED_isr2_mc_tfn3
+    T_OSAP1_M:
+      DefinitionRef: OsApplication
+      OsTrusted: true
+      OsApplicationCoreAssignment: OS_CORE_ID_MASTER
+      OsAppTaskRef:
+        - /Ecuc/Os/OSAP1_M_Act_Task1
+        - /Ecuc/Os/OSAP1_M_SetE_Task1
+        - /Ecuc/Os/OSAP1_M_Spin_Task1
+        - /Ecuc/Os/OSAP1_M_Int_MC_Task1
+        - /Ecuc/Os/OSAP1_M_IOC_Task1
+      OsAppIsrRef:
+        - /Ecuc/Os/OSAP1_M_Int_MC_Isr2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    T_OSAP1_S:
+      DefinitionRef: OsApplication
+      OsTrusted: true
+      OsApplicationCoreAssignment: OS_CORE_ID_SLAVE
+      OsAppTaskRef:
+        - /Ecuc/Os/S_IdleTask
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    NT_OSAP1:
+      DefinitionRef: OsApplication
+      OsTrusted: false
+      OsApplicationCoreAssignment: OS_CORE_ID_MASTER
+      OsAppTaskRef:
+        - /Ecuc/Os/NT_OSAP1_Act_Task1_ntnt
+        - /Ecuc/Os/NT_OSAP1_Act_Task2
+        - /Ecuc/Os/NT_OSAP1_Act_Task3_ntnt
+        - /Ecuc/Os/NT_OSAP1_Act_Task1_tnt
+        - /Ecuc/Os/NT_OSAP1_Act_Task3_tnt1
+        - /Ecuc/Os/NT_OSAP1_Act_Task3_tnt2
+        - /Ecuc/Os/NT_OSAP1_Act_Task4
+        - /Ecuc/Os/NT_OSAP1_Act_ResetTask
+        - /Ecuc/Os/NT_OSAP1_Ter_ResetTask
+        - /Ecuc/Os/NT_OSAP1_Ter_Task1
+        - /Ecuc/Os/NT_OSAP1_Ter_Task2
+        - /Ecuc/Os/NT_OSAP1_Chain_Task1
+        - /Ecuc/Os/NT_OSAP1_Chain_Task2
+        - /Ecuc/Os/NT_OSAP1_Chain_ResetTask
+        - /Ecuc/Os/NT_OSAP1_Resource_Task1
+        - /Ecuc/Os/NT_OSAP1_Resource_Task2
+        - /Ecuc/Os/NT_OSAP1_Event_Task1
+        - /Ecuc/Os/NT_OSAP1_Event_Task2
+        - /Ecuc/Os/NT_OSAP1_SetE_Task1
+        - /Ecuc/Os/NT_OSAP1_SetE_Task2
+        - /Ecuc/Os/NT_OSAP1_SetE_Task3
+        - /Ecuc/Os/NT_OSAP1_Int_A_Task1
+        - /Ecuc/Os/NT_OSAP1_Int_B_Task1
+        - /Ecuc/Os/NT_OSAP1_IOC_Task1
+        - /Ecuc/Os/NT_OSAP1_M_Act_Task1
+        - /Ecuc/Os/NT_OSAP1_M_SetE_Task1
+        - /Ecuc/Os/NT_OSAP1_M_Int_MC_Task1
+        - /Ecuc/Os/NT_OSAP1_M_Spin_Task1
+        - /Ecuc/Os/NT_OSAP1_M_IOC_Task1
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    T_OSAP2:
+      DefinitionRef: OsApplication
+      OsTrusted: true
+      OsApplicationCoreAssignment: OS_CORE_ID_MASTER
+      OsAppTaskRef:
+        - /Ecuc/Os/T_OSAP2_Act_Task2_tnt1
+        - /Ecuc/Os/T_OSAP2_Act_Task2_tnt2
+        - /Ecuc/Os/T_OSAP2_Ter_Task2_1
+        - /Ecuc/Os/T_OSAP2_Ter_Task2_2
+        - /Ecuc/Os/T_OSAP2_Chain_Task1_1
+        - /Ecuc/Os/T_OSAP2_Chain_Task1_2
+        - /Ecuc/Os/OSAP2_IOC_Task2
+      OsAppIsrRef:
+        - /Ecuc/Os/T_OSAP2_Act_Isr2
+        - /Ecuc/Os/T_OSAP2_SetE_Isr2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+      TRIGGER_ACT_ISR2_TFN1:
+        DefinitionRef: OsApplicationTrustedFunction
+        OsTrustedFunctionName: TRUSTED_act_isr2_tfn1
+      TRIGGER_SETEVENT_ISR2_TFN1:
+        DefinitionRef: OsApplicationTrustedFunction
+        OsTrustedFunctionName: TRUSTED_setevent_isr2_tfn1
+    NT_OSAP2:
+      DefinitionRef: OsApplication
+      OsTrusted: false
+      OsApplicationCoreAssignment: OS_CORE_ID_MASTER
+      OsAppTaskRef:
+        - /Ecuc/Os/NT_OSAP2_Act_ResetTask
+        - /Ecuc/Os/NT_OSAP2_Act_Task1
+        - /Ecuc/Os/NT_OSAP2_Act_Task3
+        - /Ecuc/Os/NT_OSAP2_Ter_Task2
+        - /Ecuc/Os/NT_OSAP2_Ter_ResetTask
+        - /Ecuc/Os/NT_OSAP2_Chain_ResetTask
+        - /Ecuc/Os/NT_OSAP2_Chain_Task1
+        - /Ecuc/Os/NT_OSAP2_Int_B_Task2
+        - /Ecuc/Os/NT_OSAP2_IOC_Task2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    NT_OSAP3:
+      DefinitionRef: OsApplication
+      OsTrusted: false
+      OsApplicationCoreAssignment: OS_CORE_ID_MASTER
+      OsAppTaskRef:
+        - /Ecuc/Os/NT_OSAP3_Act_Task2
+        - /Ecuc/Os/NT_OSAP3_Chain_Task2
+        - /Ecuc/Os/NT_OSAP3_Ter_Task1
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    T_OSAP2_S:
+      DefinitionRef: OsApplication
+      OsTrusted: true
+      OsApplicationCoreAssignment: OS_CORE_ID_SLAVE
+      OsAppTaskRef:
+        - /Ecuc/Os/OSAP2_S_Act_Task2
+        - /Ecuc/Os/OSAP2_S_Act_Task3
+        - /Ecuc/Os/OSAP2_S_SetE_Task2
+        - /Ecuc/Os/OSAP2_S_SetE_Task3
+        - /Ecuc/Os/OSAP2_S_Int_MC_Task2
+        - /Ecuc/Os/OSAP2_S_IOC_Task2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+    NT_OSAP2_S:
+      DefinitionRef: OsApplication
+      OsTrusted: false
+      OsApplicationCoreAssignment: OS_CORE_ID_SLAVE
+      OsAppTaskRef:
+        - /Ecuc/Os/NT_OSAP2_S_Act_Task2
+        - /Ecuc/Os/NT_OSAP2_S_Act_Task3
+        - /Ecuc/Os/NT_OSAP2_S_Act_ResetTask
+        - /Ecuc/Os/NT_OSAP2_S_SetE_Task2
+        - /Ecuc/Os/NT_OSAP2_S_SetE_Task3
+        - /Ecuc/Os/NT_OSAP2_S_Int_MC_Task2
+        - /Ecuc/Os/NT_OSAP2_S_IOC_Task2
+      OsApplicationHooks:
+        OsAppErrorHook: false
+        OsAppShutdownHook: false
+        OsAppStartupHook: false
+
+IMPLEMENTATION-DATA-TYPE:
+  uint8:
+    CATEGORY: VALUE

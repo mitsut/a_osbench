@@ -1,0 +1,11 @@
+Ecuc:
+  Os:
+    OsMemoryArea_PerfTimer:
+      DefinitionRef: OsMemoryArea
+      OsMemoryAreaStartAddress: PERF_TIMER_BASE & (~((uint32)(64 - 1)))
+      OsMemoryAreaSize: 64
+      OsMemoryAreaWriteable: true
+      OsMemoryAreaReadable: true
+      OsMemoryAreaExecutable: false
+      OsMemoryAreaCacheable: false
+      OsMemoryAreaDevice: false
