@@ -1,0 +1,10 @@
+*.o
+atk2-sc1.*
+cfg?_out.*
+Os_Cfg.h
+Os_Lcfg.*
+offset.h
+libkernel.a
+atk2-sc?
+cfg1_out
+
