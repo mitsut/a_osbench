@@ -7,45 +7,45 @@
 #              Graduate School of Information Science, Nagoya Univ., JAPAN
 #  Copyright (C) 2015-2016 by FUJI SOFT INCORPORATED, JAPAN
 #
-#  �嵭����Ԥϡ��ʲ���(1)��(4)�ξ������������˸¤ꡤ�ܥ��եȥ���
-#  �����ܥ��եȥ���������Ѥ�����Τ�ޤࡥ�ʲ�Ʊ���ˤ���ѡ�ʣ������
-#  �ѡ������ۡʰʲ������ѤȸƤ֡ˤ��뤳�Ȥ�̵���ǵ������롥
-#  (1) �ܥ��եȥ������򥽡��������ɤη������Ѥ�����ˤϡ��嵭������
-#      ��ɽ�����������Ѿ�浪��Ӳ�����̵�ݾڵ��꤬�����Τޤޤη��ǥ���
-#      ����������˴ޤޤ�Ƥ��뤳�ȡ�
-#  (2) �ܥ��եȥ������򡤥饤�֥������ʤɡ�¾�Υ��եȥ�������ȯ�˻�
-#      �ѤǤ�����Ǻ����ۤ�����ˤϡ������ۤ�ȼ���ɥ�����ȡ�����
-#      �ԥޥ˥奢��ʤɡˤˡ��嵭�����ɽ�����������Ѿ�浪��Ӳ���
-#      ��̵�ݾڵ����Ǻܤ��뤳�ȡ�
-#  (3) �ܥ��եȥ������򡤵�����Ȥ߹���ʤɡ�¾�Υ��եȥ�������ȯ�˻�
-#      �ѤǤ��ʤ����Ǻ����ۤ�����ˤϡ����Τ����줫�ξ�����������
-#      �ȡ�
-#    (a) �����ۤ�ȼ���ɥ�����ȡ����Ѽԥޥ˥奢��ʤɡˤˡ��嵭����
-#        �ɽ�����������Ѿ�浪��Ӳ�����̵�ݾڵ����Ǻܤ��뤳�ȡ�
-#    (b) �����ۤη��֤��̤�������ˡ�ˤ�äơ�TOPPERS�ץ��������Ȥ�
-#        ��𤹤뤳�ȡ�
-#  (4) �ܥ��եȥ����������Ѥˤ��ľ��Ū�ޤ��ϴ���Ū�������뤤���ʤ�»
-#      ������⡤�嵭����Ԥ����TOPPERS�ץ��������Ȥ����դ��뤳�ȡ�
-#      �ޤ����ܥ��եȥ������Υ桼���ޤ��ϥ���ɥ桼������Τ����ʤ���
-#      ͳ�˴�Ť����ᤫ��⡤�嵭����Ԥ����TOPPERS�ץ��������Ȥ�
-#      ���դ��뤳�ȡ�
+#  上記著作権者は，以下の(1)～(4)の条件を満たす場合に限り，本ソフトウェ
+#  ア（本ソフトウェアを改変したものを含む．以下同じ）を使用・複製・改
+#  変・再配布（以下，利用と呼ぶ）することを無償で許諾する．
+#  (1) 本ソフトウェアをソースコードの形で利用する場合には，上記の著作
+#      権表示，この利用条件および下記の無保証規定が，そのままの形でソー
+#      スコード中に含まれていること．
+#  (2) 本ソフトウェアを，ライブラリ形式など，他のソフトウェア開発に使
+#      用できる形で再配布する場合には，再配布に伴うドキュメント（利用
+#      者マニュアルなど）に，上記の著作権表示，この利用条件および下記
+#      の無保証規定を掲載すること．
+#  (3) 本ソフトウェアを，機器に組み込むなど，他のソフトウェア開発に使
+#      用できない形で再配布する場合には，次のいずれかの条件を満たすこ
+#      と．
+#    (a) 再配布に伴うドキュメント（利用者マニュアルなど）に，上記の著
+#        作権表示，この利用条件および下記の無保証規定を掲載すること．
+#    (b) 再配布の形態を，別に定める方法によって，TOPPERSプロジェクトに
+#        報告すること．
+#  (4) 本ソフトウェアの利用により直接的または間接的に生じるいかなる損
+#      害からも，上記著作権者およびTOPPERSプロジェクトを免責すること．
+#      また，本ソフトウェアのユーザまたはエンドユーザからのいかなる理
+#      由に基づく請求からも，上記著作権者およびTOPPERSプロジェクトを
+#      免責すること．
 #
-#  �ܥ��եȥ������ϡ�AUTOSAR��AUTomotive Open System ARchitecture�˻�
-#  �ͤ˴�Ť��Ƥ��롥�嵭�ε����ϡ�AUTOSAR����Ū�⻺������������Τ�
-#  �Ϥʤ���AUTOSAR�ϡ�AUTOSAR���ͤ˴�Ť������եȥ�����������Ū����
-#  �Ѥ���Ԥ��Ф��ơ�AUTOSAR�ѡ��ȥʡ��ˤʤ뤳�Ȥ���Ƥ��롥
+#  本ソフトウェアは，AUTOSAR（AUTomotive Open System ARchitecture）仕
+#  様に基づいている．上記の許諾は，AUTOSARの知的財産権を許諾するもので
+#  はない．AUTOSARは，AUTOSAR仕様に基づいたソフトウェアを商用目的で利
+#  用する者に対して，AUTOSARパートナーになることを求めている．
 #
-#  �ܥ��եȥ������ϡ�̵�ݾڤ��󶡤���Ƥ����ΤǤ��롥�嵭����Ԥ�
-#  ���TOPPERS�ץ��������Ȥϡ��ܥ��եȥ������˴ؤ��ơ�����λ�����Ū
-#  ���Ф���Ŭ������ޤ�ơ������ʤ��ݾڤ�Ԥ�ʤ����ޤ����ܥ��եȥ���
-#  �������Ѥˤ��ľ��Ū�ޤ��ϴ���Ū�������������ʤ�»���˴ؤ��Ƥ⡤��
-#  ����Ǥ�����ʤ���
+#  本ソフトウェアは，無保証で提供されているものである．上記著作権者お
+#  よびTOPPERSプロジェクトは，本ソフトウェアに関して，特定の使用目的
+#  に対する適合性も含めて，いかなる保証も行わない．また，本ソフトウェ
+#  アの利用により直接的または間接的に生じたいかなる損害に関しても，そ
+#  の責任を負わない．
 #
 #  $Id: Makefile 1658 2016-01-21 10:17:23Z fsi-asanoto $
 #
 
 #
-#  �������åȤλ����Makefile.target�Ǿ�񤭤����Τ��ɤ������
+#  ターゲットの指定（Makefile.targetで上書きされるのを防ぐため）
 #
 all:
 
@@ -106,7 +106,7 @@ ENABLE_SYS_TIMER =
 OMIT_HW_COUNTER = 
 
 #
-#  �ȥ졼�������˴ؤ�������
+#  トレースログに関する設定
 #
 ifeq ($(ENABLE_TRACE),true)
       ENABLE_SYS_TIMER = true
@@ -252,23 +252,23 @@ endif
 
 
 #
-#  �������åȥե������ʣ����Ʊ�������򤷤ƤϤʤ�ʤ���
+#  ターゲットファイル（複数を同時に選択してはならない）
 #
 all: $(OBJFILE)
 #all: $(OBJNAME).bin
 #all: $(OBJNAME).srec
 
-##### �ʲ����Խ����ʤ����� #####
+##### 以下は編集しないこと #####
 
 #
-#  �Ķ��˰�¸���륳��ѥ��륪�ץ��������
+#  環境に依存するコンパイルオプションの定義
 #
 ifdef DBGENV
   CDEFS := $(CDEFS) -D$(DBGENV)
 endif
 
 #
-#  �����ͥ�Υե����빽�������
+#  カーネルのファイル構成の定義
 #
 include $(SRCDIR)/kernel/Makefile.kernel
 ifdef KERNEL_FUNCOBJS
@@ -281,14 +281,14 @@ else
 endif
 
 #
-#  �������ե�����Τ���ǥ��쥯�ȥ�˴ؤ������
+#  ソースファイルのあるディレクトリに関する定義
 #
 vpath %.c $(KERNEL_DIR) $(SYSMOD_DIR) $(APPL_DIR)
 vpath %.S $(KERNEL_DIR) $(SYSMOD_DIR) $(APPL_DIR)
 vpath %.arxml $(KERNEL_DIR) $(SYSMOD_DIR) $(APPL_DIR)
 
 #
-#  ����ѥ���Τ�����ѿ������
+#  コンパイルのための変数の定義
 #
 KERNEL_LIB_OBJS = $(KERNEL_ASMOBJS) $(KERNEL_COBJS) $(KERNEL_LCOBJS)
 SYSMOD_OBJS = $(SYSMOD_ASMOBJS) $(SYSMOD_COBJS)
@@ -315,7 +315,7 @@ ifdef LDSCRIPT
 endif
 
 #
-#  ���ե��åȥե������offset.h�ˤ�������§
+#  オフセットファイル（offset.h）の生成規則
 #
 offset.h: $(APPL_CFG_INPUT) Os_Lcfg.timestamp $(SRCDIR)/kernel/genoffset.tf
 	$(CFG) --pass 3 --kernel $(CFG_KERNEL) $(INCLUDES) \
@@ -323,7 +323,7 @@ offset.h: $(APPL_CFG_INPUT) Os_Lcfg.timestamp $(SRCDIR)/kernel/genoffset.tf
 				-T $(OFFSET_TF) $(CFG_TABS) $(filter %.arxml,$^)
 
 #
-#  �����ͥ�Υ���ե�����졼�����ե����������
+#  カーネルのコンフィギュレーションファイルの生成
 #
 cfg1_out.c: $(APPL_CFG_INPUT) $(SRCDIR)/kernel/kernel_def.csv
 	$(CFG) --pass 1 --kernel $(CFG_KERNEL) $(INCLUDES) $(CFG_TABS) $(filter %.arxml,$^)
@@ -337,7 +337,7 @@ Os_Lcfg.timestamp: $(APPL_CFG_INPUT) $(START_OBJS) cfg1_out.o $(END_OBJS) $(HIDD
 	$(CFG) --pass 2 --kernel $(CFG_KERNEL) $(INCLUDES) \
 				-T $(TARGETDIR)/target.tf $(CFG_TABS) $(filter %.arxml,$^)
 
-#  ��¸Os_Cfg.h��pass2����������Os_Cfg_tmp.h�Ȥκ�ʬ��������Os_Cfg.h����
+#  既存Os_Cfg.hとpass2で生成したOs_Cfg_tmp.hとの差分がある場合Os_Cfg.hを上書き
 	if ! cmp Os_Cfg.h Os_Cfg_tmp.h >/dev/null 2>&1 ; then \
 		mv Os_Cfg_tmp.h Os_Cfg.h ;\
 	else \
@@ -354,7 +354,7 @@ endif
 	touch -r Os_Lcfg.c Os_Lcfg.timestamp
 
 #
-#  �����ͥ�饤�֥��ե����������
+#  カーネルライブラリファイルの生成
 #
 libkernel.a: $(OFFSET_H) $(KERNEL_LIB_OBJS)
 	rm -f libkernel.a
@@ -362,12 +362,12 @@ libkernel.a: $(OFFSET_H) $(KERNEL_LIB_OBJS)
 	$(RANLIB) libkernel.a
 
 #
-#  ���̤ʰ�¸�ط������
+#  特別な依存関係の定義
 #
 banner.o: Os_Lcfg.timestamp $(filter-out banner.o,$(ALL_OBJS)) $(LIBS_DEP)
 
 #
-#  ���ΤΥ��
+#  全体のリンク
 #
 $(OBJFILE): $(APPL_CFG_INPUT) Os_Lcfg.timestamp $(ALL_OBJS) $(LIBS_DEP)
 	$(LINK) $(CFLAGS) $(LDFLAGS) -o $(OBJFILE) $(START_OBJS) \
@@ -378,22 +378,22 @@ $(OBJFILE): $(APPL_CFG_INPUT) Os_Lcfg.timestamp $(ALL_OBJS) $(LIBS_DEP)
 	$(CFG) --pass 3 --kernel $(CFG_KERNEL) $(INCLUDES) \
 				--rom-image $(OBJNAME).srec --symbol-table $(OBJNAME).syms \
 				-T $(TARGETDIR)/target_check.tf $(CFG_TABS) $(filter %.arxml,$^)
-	$(OBJDUMP) -d $(OBJFILE) > $(OBJNAME).dump
+#	$(OBJDUMP) -d $(OBJFILE) > $(OBJNAME).dump
 
 #
-#  �Х��ʥ�ե����������
+#  バイナリファイルの生成
 #
 $(OBJNAME).bin: $(OBJFILE)
 	$(OBJCOPY) -O binary -S $(OBJFILE) $(OBJNAME).bin
 
 #
-#  S�쥳���ɥե����������
+#  Sレコードファイルの生成
 #
 $(OBJNAME).srec: $(OBJFILE)
 	$(OBJCOPY) -O srec -S $(OBJFILE) $(OBJNAME).srec
 
 #
-#  ����ѥ����̤ξõ�
+#  コンパイル結果の消去
 #
 .PHONY: clean
 clean:
@@ -428,11 +428,11 @@ realclean: cleandep clean
 	rm -f $(REALCLEAN_FILES)
 
 #
-#  �����ͥ졼�������������ե�����Υ���ѥ���롼��Ȱ�¸�ط�����
-#  �롼������
+#  ジェネレータが生成したファイルのコンパイルルールと依存関係作成
+#  ルールの定義
 #
-#  �����ͥ졼�������������ե�����ϡ����ץꥱ�������ץ�������ѡ�����
-#  �ƥॵ���ӥ��ѡ������ͥ��ѤΤ��٤ƤΥ��ץ������դ��ƥ���ѥ��뤹�롥
+#  ジェネレータが生成したファイルは，アプリケーションプログラム用，シス
+#  テムサービス用，カーネル用のすべてのオプションを付けてコンパイルする．
 #
 OS_LCFG_CFLAGS = $(APPL_CFLAGS) $(SYSMOD_CFLAGS) $(KERNEL_CFLAGS)
 
@@ -447,7 +447,7 @@ $(ALL_CFG_OBJS:.o=.d): %.d: %.c
 		-O "$(CFLAGS) $(OS_LCFG_CFLAGS)" $< >> Makefile.depend
 
 #
-#  ��¸�ط��ե����������
+#  依存関係ファイルの生成
 #
 .PHONY: gendepend
 gendepend:
@@ -466,16 +466,16 @@ depend: cleandep $(OFFSET_H) Os_Lcfg.timestamp gendepend \
 endif
 
 #
-#  ��¸�ط��ե�����򥤥󥯥롼��
+#  依存関係ファイルをインクルード
 #
 -include Makefile.depend
 
 #
-#  ��ȯ�ġ���Υ��ޥ��̾�����
+#  開発ツールのコマンド名の定義
 #
 ifeq ($(TOOL),gcc)
   #
-  #  GNU��ȯ�Ķ���
+  #  GNU開発環境用
   #
   ifdef GCC_TARGET
     GCC_TARGET_PREFIX = $(GCC_TARGET)-
@@ -500,7 +500,7 @@ else
 endif
 
 #
-#  ����ѥ���롼������
+#  コンパイルルールの定義
 #
 KERNEL_ALL_COBJS = $(KERNEL_COBJS) $(KERNEL_AUX_COBJS)
 
@@ -544,7 +544,7 @@ $(APPL_ASMOBJS): %.o: %.S
 	$(CC) -c $(CFLAGS) $(APPL_CFLAGS) $<
 
 #
-#  ��¸�ط������롼������
+#  依存関係作成ルールの定義
 #
 $(KERNEL_COBJS:.o=.d): %.d: %.c
 	@$(PERL) $(SRCDIR)/utils/makedep -C $(CC) $(MAKEDEP_OPTS) \
@@ -579,7 +579,7 @@ $(APPL_ASMOBJS:.o=.d): %.d: %.S
 		-O "$(CFLAGS) $(APPL_CFLAGS)" $< >> Makefile.depend
 
 #
-#  �ǥե���ȥ���ѥ���롼�����
+#  デフォルトコンパイルルールを上書き
 #
 %.o: %.c
 	@echo "*** Default compile rules should not be used."
